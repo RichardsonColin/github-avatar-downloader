@@ -1,7 +1,9 @@
+require('dotenv').config();
 const request = require('request');
-const token = require('./secrets');
+//const token = require('./secrets');
 const fs = require('fs');
 const args = process.argv.slice(2);
+
 
 // If the user doesn't enter the required arguements, errors are thrown.
 if(args[0] === undefined) {
@@ -18,7 +20,7 @@ function getRepoContributors(repoOwner, repoName, cb) {
     url: "https://api.github.com/repos/" + repoOwner + "/" + repoName + "/contributors",
     headers: {
       'User-Agent': 'request',
-      "Authorization": token.GITHUB_TOKEN
+      "Authorization": process.env.GITHUB_TOKEN
     }
   };
 
@@ -54,5 +56,5 @@ getRepoContributors(args[0], args[1], function(err, result) {
     var avatarUrl = each.avatar_url;
     var filePath = each.login;
     downloadImageByURL(avatarUrl, filePath);
-  })
+  });
 });
