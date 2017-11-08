@@ -3,8 +3,6 @@ const request = require('request');
 const fs = require('fs');
 const args = process.argv.slice(2);
 
-//console.log("token", Object.keys(token.parsed)[0]);
-
 if(args[0] === undefined) {
     throw "Need to enter an Github owner name."; // Error for missing Github owner name.
 }
@@ -15,7 +13,9 @@ if(token.error) {
   throw "The provided .env file cannot be accessed. Please provide a .env file."; // Error for missing .env file.
 }
 if(Object.keys(token.parsed)[0] !== "GITHUB_TOKEN") {
-  throw "Please provide the proper token syntax; <GITHUB_TOKEN=token 'Github Token Number'>" // Error for improper .env file syntax.
+  throw "Please provide the proper token syntax; <GITHUB_TOKEN=token 'Github Token Number'>"; // Error for improper .env file syntax.
+} else if(!token.parsed.GITHUB_TOKEN) {
+  throw "Please provide the proper token syntax; <GITHUB_TOKEN=token 'Github Token Number'>";
 }
 
 console.log('Welcome to the GitHub Avatar Downloader!');
