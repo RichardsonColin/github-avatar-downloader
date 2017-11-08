@@ -59,7 +59,6 @@ function downloadImageByURL(url, filePath) {
 getRepoContributors(args[0], args[1], function(err, result) {
   console.log("Errors:", err);
   const repos = JSON.parse(result);
-  console.log("repos", repos);
 
   if(repos.message === "Bad credentials") {
     throw "The provided token doesn't appear to work. Please enter it as GITHUB_TOKEN=token <token number>"; // Error for an incorrect token.
